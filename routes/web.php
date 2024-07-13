@@ -2,10 +2,11 @@
 
 use App\Http\Controllers\FileModelController;
 use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('dashboard');
+    return redirect::route('login');
 });
 
 
