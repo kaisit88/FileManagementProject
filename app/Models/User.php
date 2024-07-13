@@ -20,6 +20,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'isAdmin',
+
     ];
 
     /**
@@ -43,5 +45,11 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+
+    public function isAdmin()
+    {
+        return $this->isAdmin; // Assuming 'isAdmin' is a boolean attribute in your users table
     }
 }

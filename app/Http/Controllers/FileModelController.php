@@ -36,7 +36,7 @@ class FileModelController extends Controller
             'category_id' => 'required|exists:categories,id',
             'subcategory_id' => 'required|exists:subcategories,id',
             'image_path' => 'required|image|max:51200', // Allow only image files up to 5MB
-            'file_path' => 'required|file|mimes:exe,pdf,rar,zip,deb,iso|max:512000', // Allow specified file types up to 50MB
+            'file_path' => 'required|file|mimes:exe,pdf,rar,zip,deb,iso|max:5120000', // Allow specified file types up to 50MB
         ]);
 
         // Store the image file
@@ -53,7 +53,7 @@ class FileModelController extends Controller
         File::create($validated);
 
         // Redirect or return a response
-        return redirect()->route('files.index')->with('success', 'File uploaded successfully!');
+        return redirect()->route('admin.files')->with('success', 'File uploaded successfully!');
     }
 
     public function edit(File $file)

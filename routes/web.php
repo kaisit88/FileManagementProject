@@ -1,14 +1,28 @@
 <?php
 
+use App\Http\Controllers\FileModelController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('dashboard');
 });
 
-use App\Http\Controllers\FileModelController;
-Route::get('/files/download/{file}', [FileModelController::class, 'download'])->name('file.download');
-Route::get('/files/image/{file}', [FileModelController::class, 'showimage'])->name('image.download');
 
-Route::resource('files', FileModelController::class);
+Route::middleware('auth')->group(function () {
+    Route::resource('files', FileModelController::class);
 
+
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
