@@ -14,10 +14,22 @@ class FileModelController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $files = File::all();
+//        $files = File::all();
+//        return view('files.index', compact('files'));
+
+        $query = File::query();
+
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where('name', 'like', '%' . $search . '%');
+        }
+
+        $files = $query->get();
+
         return view('files.index', compact('files'));
+
     }
 
     public function create()
@@ -53,7 +65,7 @@ class FileModelController extends Controller
         File::create($validated);
 
         // Redirect or return a response
-        return redirect()->route('admin.files')->with('success', 'File uploaded successfully!');
+        return redirect()->route('files.index')->with('success', 'File uploaded successfully!');
     }
 
     public function edit(File $file)

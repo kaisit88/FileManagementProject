@@ -44,6 +44,44 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
     <title>Document</title>
+
+
+    <style>
+        .responsive-img {
+            width: 100%;
+            height: auto;
+        }
+
+        @media (min-width: 576px) {
+            .responsive-img {
+                height: 150px; /* Adjust height for small screens */
+            }
+        }
+
+        @media (min-width: 768px) {
+            .responsive-img {
+                height: 200px; /* Adjust height for medium screens */
+            }
+        }
+
+        @media (min-width: 992px) {
+            .responsive-img {
+                height: 250px; /* Adjust height for large screens */
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .responsive-img {
+                height: 300px; /* Adjust height for extra large screens */
+            }
+        }
+    </style>
+
+
+
+
+
+
 </head>
 <body>
 
@@ -89,10 +127,16 @@
                             <a class="nav-link disabled" aria-disabled="true">Disabled</a>
                         </li>
                     </ul>
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+{{--                    <form class="d-flex" role="search">--}}
+{{--                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">--}}
+{{--                        <button class="btn btn-outline-success" type="submit">Search</button>--}}
+{{--                    </form>--}}
+
+                    <form class="d-flex" role="search" action="{{ route('files.index') }}" method="GET">
+                        <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search" value="{{ request('search') }}">
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
+
                 </div>
             </div>
         </nav>
@@ -101,9 +145,9 @@
 
     <div class="row">
         @foreach($files as $file)
-            <div class="col-md-4 mb-4">
+            <div class="col-md-2 mb-2">
                 <div class="card">
-                    <img src="{{ asset('storage/' . $file->image_path) }}" class="card-img-top" alt="{{ $file->name }}">
+                    <img src="{{ asset('storage/' . $file->image_path) }}" class="img-thumbnail responsive-img" alt="{{ $file->name }}">
                     <div class="card-body">
                         <h5 class="card-title">{{ $file->name }}</h5>
                         <p class="card-text">{{ $file->category->name }}</p>
