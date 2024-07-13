@@ -36,7 +36,7 @@ class FileResource extends Resource
                 Forms\Components\FileUpload::make('file_path')
                     ->label('attachment')
                     ->acceptedFileTypes(['application/exe', 'application/pdf', 'application/rar', 'application/zip', 'application/deb', 'application/iso'])
-                    ->maxSize(1024000000)
+                    ->maxSize(5120000), // 500 MB
 
 // Adjusted for maximum file size in kilobytes
             ]);

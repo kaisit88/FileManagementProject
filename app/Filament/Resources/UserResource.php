@@ -37,7 +37,10 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('email'),
+                Tables\Columns\TextColumn::make('updated_at'),
+                Tables\Columns\ToggleColumn::make('isAdmin'),
             ])
             ->filters([
                 //
