@@ -47,9 +47,16 @@ class User extends Authenticatable
         ];
     }
 
-
-    public function isAdmin()
+    public function canManageSettings(): bool
     {
-        return $this->isAdmin; // Assuming 'isAdmin' is a boolean attribute in your users table
+        // Implement your logic to determine if the user can manage settings
+        // For example, check if the user has an isAdmin property or a specific role
+        return $this->isAdmin;
+    }
+
+
+    public function getIsAdminAttribute(): bool
+    {
+        return $this->attributes['isAdmin'];
     }
 }

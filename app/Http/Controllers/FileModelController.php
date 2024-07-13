@@ -16,19 +16,20 @@ class FileModelController extends Controller
      */
     public function index(Request $request)
     {
-//        $files = File::all();
-//        return view('files.index', compact('files'));
 
-        $query = File::query();
+        $categories = Category::with('subcategories')->get();
 
-        if ($request->has('search')) {
-            $search = $request->input('search');
-            $query->where('name', 'like', '%' . $search . '%');
+        // Assuming you have a search functionality
+        $search = $request->query('search');
+        $filesQuery = File::query();
+
+        if ($search) {
+            $filesQuery->where('name', 'like', '%' . $search . '%');
         }
 
-        $files = $query->get();
+        $files = $filesQuery->get();
 
-        return view('files.index', compact('files'));
+        return view('files.index', compact('categories', 'files'));
 
     }
 
@@ -96,4 +97,18 @@ class FileModelController extends Controller
 
         return response()->download($filePath);
     }
+    public function showBySubcategory(Subcategory $subcategory)
+    {
+        // Fetch files associated with the selected subcategory
+        $files = $subcategory->files()->get(); // Use get() to retrieve the collection
+
+        // Fetch categories with their subcategories for the sidebar
+        $categories = Category::with('subcategories')->get();
+
+        return view('files.index', compact('files', 'categories'));
+    }
+
+
+
+
 }
