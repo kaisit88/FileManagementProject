@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return redirect::route('login');
+    return view('welcome');
 });
 
 Route::get('/files/create', [FileModelController::class, 'create' ])->middleware('admin');
