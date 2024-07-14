@@ -20,7 +20,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'isAdmin',
+        'is_admin',
 
     ];
 
@@ -47,16 +47,4 @@ class User extends Authenticatable
         ];
     }
 
-    public function canManageSettings(): bool
-    {
-        // Implement your logic to determine if the user can manage settings
-        // For example, check if the user has an isAdmin property or a specific role
-        return $this->isAdmin;
-    }
-
-
-    public function getIsAdminAttribute(): bool
-    {
-        return $this->attributes['isAdmin'];
-    }
 }
