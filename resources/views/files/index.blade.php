@@ -38,18 +38,114 @@
 </head>
 <body>
 
-<div class="container-fluid">
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-dark bg-dark fixed-top" dir="ltr">
         <div class="container-fluid">
-            <a class="navbar-brand mx-3" href="/files">Files Management System</a>
+            {{-- <a class="navbar-brand m-1" href="#" dir="ltr">القائمة الجانبية المظلمة</a> --}}
+
+
+            <div class="navbar">
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="/admin">Control Panel</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="dropdown-item">Log Out</button>
+                        </form>
+                    </li>
+                </ul> 
+
+                <form class="d-flex mt-2" role="search">
+                    <button class="btn btn-success me-2" type="submit">بحث</button>
+
+                    <input class="form-control me-1" type="search" placeholder="بحث" aria-label="بحث">
+                </form>
+
+            </div>
+
+
+       
+
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+                <div class="offcanvas-header">
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body" dir="rtl">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+
+                        <hr>
+                        <li>
+                            <h5 class="offcanvas-title" dir="rtl" id="offcanvasDarkNavbarLabel">  الاقسام الرئيسية و الفرعية</h5>
+
+                        </li>
+
+<hr>
+
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">الرئيسية</a>
+                        </li>
+                      
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">رابط</a>
+                        </li>
+
+                        <li>
+                            <div class="col">
+                                <div class="list-group">
+                                    @foreach($categories as $category)
+                                        <ul class="list-group-item list-group-item-light active mt-2 mb-2">
+                                            {{ $category->name }}
+                                        </ul>
+                                        <div id="collapse-{{ $category->id }}">
+                                            @foreach($category->subcategories as $subcategory)
+                                                <a href="{{ route('files.subcategory', ['subcategory' => $subcategory->id]) }}" class="list-group-item list-group-item-action ml-3">{{ $subcategory->name }}</a>
+                                            @endforeach
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+
+                        </li>
+                        <li class="nav-item dropdown" dir="rtl">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                القائمة المنسدلة
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <li><a class="dropdown-item" href="#">عمل</a></li>
+                                <li><a class="dropdown-item" href="#">عمل آخر</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#">شيء آخر هنا</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                   
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+
+
+{{-- <div class="container-fluid"> --}}
+
+    
+    <!-- Navbar -->
+    {{-- <nav class="navbar navbar-expand-lg bg-body-tertiary" dir="rtl">
+        <div class="container-fluid">
+            <a class="navbar-brand mx-3" href="/files">نظام ادارة الملفات</a>
+            <a href="/files/create" class="btn btn-primary nav-item" tabindex="-1" role="button" aria-disabled="true">Upload Files</a>
 
             <form class="d-flex mx-auto">
                 <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search" value="{{ request('search') }}">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
 
-            <a href="/files/create" class="btn btn-primary nav-item" tabindex="-1" role="button" aria-disabled="true">Upload Files</a>
 
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item dropdown">
@@ -70,25 +166,12 @@
                 </li>
             </ul>
         </div>
-    </nav>
+    </nav> --}}
     <!-- End Navbar -->
 
     <div class="row mt-3">
         <!-- Sidebar -->
-        <div class="col-md-2">
-            <div class="list-group">
-                @foreach($categories as $category)
-                    <ul class="list-group-item list-group-item-light active mt-2 mb-2">
-                        {{ $category->name }}
-                    </ul>
-                    <div id="collapse-{{ $category->id }}">
-                        @foreach($category->subcategories as $subcategory)
-                            <a href="{{ route('files.subcategory', ['subcategory' => $subcategory->id]) }}" class="list-group-item list-group-item-action ml-3">{{ $subcategory->name }}</a>
-                        @endforeach
-                    </div>
-                @endforeach
-            </div>
-        </div>
+        
         <!-- End Sidebar -->
 
         <div class="col-md-10">
