@@ -13,25 +13,25 @@
 
         @media (min-width: 576px) {
             .responsive-img {
-                height: 150px; /* Adjust height for small screens */
+                height: 100px; /* Adjust height for small screens */
             }
         }
 
         @media (min-width: 768px) {
             .responsive-img {
-                height: 200px; /* Adjust height for medium screens */
+                height: 135px; /* Adjust height for medium screens */
             }
         }
 
         @media (min-width: 992px) {
             .responsive-img {
-                height: 250px; /* Adjust height for large screens */
+                height: 175px; /* Adjust height for large screens */
             }
         }
 
         @media (min-width: 1200px) {
             .responsive-img {
-                height: 300px; /* Adjust height for extra large screens */
+                height: 220px; /* Adjust height for extra large screens */
             }
         }
     </style>
@@ -43,19 +43,19 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <form class="d-flex ms-auto me-3" role="search">
+            <form class="d-flex ms-auto me-3" role="search" action="{{ route('files.index') }}" method="GET">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-success" type="submit">Search</button>
             </form>
-            <div class="dropdown">
+            
+            <div class="btn-group dropstart">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                     {{ Auth::user()->name }}
                 </button>
                 <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton">
-                    @if(Auth::user()->isAdmin)
+                    @if(Auth::user()->is_admin)
                         <li><a class="dropdown-item" href="/admin">Control Panel</a></li>
                     @endif
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li>
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -97,15 +97,15 @@
     <div class="container-fluid mt-5 pt-5">
         <div class="row mt-4">
             @foreach($files as $file)
-                <div class="col-lg-2 col-md-3 col-sm-6 mb-3">
+                <div class="col-lg-3 col-md-4 col-sm-7 mb-3">
                     <div class="card">
                         <img src="{{ asset('storage/' . $file->image_path) }}" class="card-img-top responsive-img" alt="{{ $file->name }}">
                         <div class="card-body">
-                            <h5 class="card-title">{{ $file->name }}</h5>
+                            <h5 class="card-title">Name : {{ $file->name }}</h5>
                             <p class="card-text">Category: {{ $file->category->name }}</p>
                             <p class="card-text">Subcategory: {{ $file->subcategory->name }}</p>
-                            <p class="card-text">Uploaded By: {{ $file->uploaded_by }}</p>
-                            <p class="card-text">Upload Date: {{ $file->created_at->format('d-m-Y') }}</p>
+                            {{-- <p class="card-text">Uploaded By: {{ $file->uploaded_by }}</p> --}}
+                            {{-- <p class="card-text">Upload Date: {{ $file->created_at->format('d-m-Y') }}</p> --}}
                             <a href="{{ asset('storage/' . $file->file_path) }}" class="btn btn-primary">Download</a>
                         </div>
                     </div>

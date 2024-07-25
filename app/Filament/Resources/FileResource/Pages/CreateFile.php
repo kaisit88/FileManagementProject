@@ -18,6 +18,17 @@ class CreateFile extends CreateRecord
     }
 
     
+    protected function afterCreate(): void
+    {
+        parent::afterCreate();
 
+        // Add custom logic here, for example, sending a notification
+
+        // Redirect to /admin/files
+        $this->redirect('/admin/files');
+
+
+        
+    }
 
 }

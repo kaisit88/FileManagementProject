@@ -17,7 +17,13 @@ class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
+    protected static ?int $navigationSort = 3;
+
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    protected static ?string $navigationGroup = '‘Users Administrating';
+
 
     public static function form(Form $form): Form
     {
@@ -29,7 +35,7 @@ class UserResource extends Resource
                 Forms\Components\TextInput::make('name')->required(),
                 Forms\Components\TextInput::make('email')->required()->email(),
                 Forms\Components\TextInput::make('password')->required()->password(),
-                Forms\Components\Checkbox::make('isAdmin')->label('Is Admin'),
+                Forms\Components\Checkbox::make('is_admin')->label('Is Admin'),
             ]);
     }
 
@@ -40,7 +46,7 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('email'),
                 Tables\Columns\TextColumn::make('updated_at'),
-                Tables\Columns\ToggleColumn::make('isAdmin'),
+                Tables\Columns\ToggleColumn::make('is_admin'),
             ])
             ->filters([
                 //

@@ -6,9 +6,12 @@ use App\Http\Middleware\IsAdmin;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', function ()
+ {
+
+    return redirect('/files');
+
+ });
 
 Route::get('/files/create', [FileModelController::class, 'create' ])->middleware('admin');
 
@@ -22,8 +25,8 @@ Route::get('/files/subcategory/{subcategory}', [FileModelController::class, 'sho
 
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+    return redirect('/admin');
+});
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

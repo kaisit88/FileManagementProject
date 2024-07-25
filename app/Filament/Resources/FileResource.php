@@ -22,6 +22,17 @@ class FileResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?int $navigationSort = 3;
+
+
+    public static function getNavigationBadge(): ?string
+{
+    return static::getModel()::count();
+}
+
+protected static ?string $navigationGroup = 'Files and Categories';
+
+
     public static function form(Form $form): Form
     {
         return $form
@@ -59,6 +70,9 @@ class FileResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+            
+
+                
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
