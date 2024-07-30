@@ -48,7 +48,7 @@
                 <button class="btn btn-success" type="submit">Search</button>
             </form>
             
-            <div class="btn-group dropstart">
+            {{-- <div class="btn-group dropstart">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                     {{ Auth::user()->name }}
                 </button>
@@ -66,7 +66,7 @@
                         </form>
                     </li>
                 </ul>
-            </div>
+            </div> --}}
             <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Main and Sub Categories</h5>
