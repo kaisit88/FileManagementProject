@@ -8,9 +8,64 @@
 </head>
 <body>
 
-<div class="row">
+<div class="row mb-5">
 
 
+    <nav class="navbar navbar-dark bg-dark fixed-top mb-5">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <form class="d-flex ms-auto me-3" role="search" action="{{ route('files.index') }}" method="GET">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-success" type="submit">Search</button>
+            </form>
+            
+            {{-- <div class="btn-group dropstart">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{ Auth::user()->name }}
+                </button>
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton">
+                    @if(Auth::user()->is_admin)
+                        <li><a class="dropdown-item" href="/admin">Control Panel</a></li>
+                    @endif
+                    <li><hr class="dropdown-divider"></li>
+                    <li>
+                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            Log out
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </li>
+                </ul>
+            </div> --}}
+            <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Main and Sub Categories</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-between">
+                        <li class="nav-item">
+                            <div class="list-group">
+                                @foreach($categories as $category)
+                                    <ul class="list-group-item list-group-item-light active mt-2 mb-2">
+                                        {{ $category->name }}
+                                    </ul>
+                                    <div id="collapse-{{ $category->id }}">
+                                        @foreach($category->subcategories as $subcategory)
+                                            <a href="{{ route('files.subcategory', ['subcategory' => $subcategory->id]) }}" class="list-group-item list-group-item-action ml-3">{{ $subcategory->name }}</a>
+                                        @endforeach
+                                    </div>
+                                @endforeach
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
 
 </div>
 <div class="row mt-5">
@@ -20,7 +75,7 @@
     </div>
     <div class="col-4">
 
-        <div class="card">
+        <div class="card mt-5">
             <div class="card-header">
                 File Upload Form
             </div>

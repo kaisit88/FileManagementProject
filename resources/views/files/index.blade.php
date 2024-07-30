@@ -47,7 +47,11 @@
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-success" type="submit">Search</button>
             </form>
-            
+            <div class="btn">
+                <button class="btn btn-secondary" type="button" onclick="window.location.href='/files/create'">
+                    UPLOAD FILES
+                </button>
+            </div>
             {{-- <div class="btn-group dropstart">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                     {{ Auth::user()->name }}
